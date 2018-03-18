@@ -12,15 +12,15 @@ const Search = props => (
             <div className="panel-body">
               <form>
                 <div className="form-group">
-                  <label htmlFor="search">Search</label>
+                  <label htmlFor="q">Search</label>
                   <input 
                     onChange={props.handleInputChange}
-                    value={props.search}
-                    name="search"
+                    value={props.q}
+                    name="q"
                     type="text"
                     className="form-control"
                     placeholder="Search a topic..."
-                    id="search"
+                    id="q"
                   />
                 </div>
                 {/*
@@ -34,27 +34,27 @@ const Search = props => (
                 </div>
                 */}
                 <div className="form-group">
-                  <label htmlFor="startYear">Start Year (Optional)</label>
+                  <label htmlFor="begin_date">Start Year (Optional)</label>
                   <input 
                     onChange={props.handleInputChange}
-                    value={props.startYear}
-                    name="startYear"
+                    value={props.begin_date}
+                    name="begin_date"
                     type="text"
                     className="form-control" 
                     placeholder=""
-                    id="startYear" 
+                    id="begin_date" 
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="endYear">End Year (Optional)</label>
+                  <label htmlFor="end_date">End Year (Optional)</label>
                   <input 
                     onChange={props.handleInputChange}
-                    value={props.endYear}
-                    name="endYear"
+                    value={props.end_date}
+                    name="end_date"
                     type="text"
                     className="form-control" 
                     placeholder=""
-                    id="endYear"
+                    id="end_date"
                   />
                 </div>
                 <button onClick={props.handleFormSubmit} className="btn btn-primary">

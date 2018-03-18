@@ -12,7 +12,7 @@ const Results = props => (
 						<div className="panel-body">
 							<div className="list-group">
 						    {/*props.results.map(result => ())*/}
-						    <div href="#" className="list-group-item">
+						    <div className="list-group-item">
 							  	<div className="row">
 							  		<div className="col-xs-12 col-sm-2 col-sm-push-10 text-right"><a className="btn btn-success" href="#" role="button">Save</a></div>
 							  		<div className="col-xs-12 col-sm-10 col-sm-pull-2">

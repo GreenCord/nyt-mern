@@ -7,9 +7,9 @@ import './SearchContainer.css';
 
 class SearchResultContainer extends Component {
   state = {
-    search: "",
-    startYear: "",
-    endYear: "",
+    q: "",
+    begin_date: "",
+    end_date: "",
     results: []
   };
 
@@ -22,7 +22,10 @@ class SearchResultContainer extends Component {
     // API.search(query)
     //   .then(res => this.setState({ results: res.data.data }))
     //   .catch(err => console.log(err));
-    API.getArticles(query);
+    console.log('getArticles, using query',query);
+    API.getArticles(query)
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err));
   };
 
   handleInputChange = event => {
@@ -36,7 +39,12 @@ class SearchResultContainer extends Component {
   // When the form is submitted, search the Giphy API for `this.state.search`
   handleFormSubmit = event => {
     event.preventDefault();
-    this.getArticles(this.state.search);
+    let query = {
+      q: this.state.q,
+      begin_date: this.state.begin_date,
+      end_date: this.state.end_date
+    }
+    this.getArticles(query);
   };
 
   handleClearResults = event => {
@@ -50,9 +58,9 @@ class SearchResultContainer extends Component {
     return (
       <div>
         <Search
-          search={this.state.search}
-          startYear={this.state.startYear}
-          endYear={this.state.endYear}
+          search={this.state.q}
+          begin_date={this.state.begin_date}
+          end_date={this.state.end_date}
           handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
           handleClearResults={this.handleClearResults}
