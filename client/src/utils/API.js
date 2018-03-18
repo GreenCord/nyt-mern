@@ -4,6 +4,7 @@ const BASEURL = 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
 const KEY = process.env.REACT_APP_NYTKEY;
 
 export default {
+
 	getArticles: function(query) {
 		console.log('Axios getting articles with',query);
 		return axios({
@@ -16,5 +17,22 @@ export default {
 					'end_year': query.end_year
 			}
 		});
+	},
+
+	getDbArticles: function() {
+		console.log('Loading saved articles...');
+		return axios({
+			method: 'get',
+			url: '/api/articles'
+		});
+	},
+
+	saveArticle: function(data) {
+		console.log('UNIMPLEMENTED: Saving article',data);
+		return axios({
+			method: 'post',
+			url: '/api/articles',
+			data: data
+		})
 	}
 };

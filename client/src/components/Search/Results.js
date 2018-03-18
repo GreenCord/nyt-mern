@@ -1,4 +1,5 @@
 import React from "react";
+import SaveBtn from './SaveBtn';
 
 const Results = props => (
   <div className="container-fluid">
@@ -20,7 +21,7 @@ const Results = props => (
 								  					<a className="btn btn-primary" href={result.web_url} role="button" target="_blank">Read Article</a>
 								  				</div>
 													<div className="col-xs-12 col-sm-12 col-md-6">
-								  					<a onClick={props.handleSaveArticle} className="btn btn-success" role="button">Save</a>
+								  					<SaveBtn onClick={()=> props.handleSaveArticle(result)} />
 								  				</div>
 								  			</div>
 								  		</div>

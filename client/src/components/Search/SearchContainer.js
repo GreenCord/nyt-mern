@@ -10,12 +10,14 @@ class SearchResultContainer extends Component {
     q: "",
     begin_date: "",
     end_date: "",
-    results: []
+    results: [],
+    saved: []
   };
 
   // When this component mounts, search the Giphy API for pictures of kittens
   componentDidMount() {
     console.log('Results component mounted.');
+    this.loadSavedArticles();
   }
 
   getArticles = query => {
@@ -30,6 +32,12 @@ class SearchResultContainer extends Component {
     })
     .catch(err=>console.log(err));
   };
+
+  loadSavedArticles = () => {
+    API.getDbArticles()
+    .then(res => console.log('Loading saved articles:',res))
+    .catch(err => console.log(err));
+  }
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -50,9 +58,17 @@ class SearchResultContainer extends Component {
     this.getArticles(query);
   };
 
-  handleSaveArticle = event => {
-    event.preventDefault();
-    console.log('UNIMPLEMENTED: Saving article...');
+  handleSaveArticle = data => {
+    console.log('UNIMPLEMENTED: Saving article:',data);
+    const dbData = {
+      nyt_id: data._id,
+      headline: data.headline,
+      snippet: data.snippet,
+      web_url: data.web_url
+    }
+    API.saveArticle(dbData)
+    .then(res=>this.loadSavedArticles)
+    .catch(err=>console.log(err));
   }
 
   handleClearResults = event => {

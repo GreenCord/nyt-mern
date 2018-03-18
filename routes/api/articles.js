@@ -1,5 +1,5 @@
 const router = require('express').Router();
-// const articlesController = require('../../controllers/articlesController');
+const articlesController = require('../../controllers/articlesController');
 
 
 // GET /api/articles

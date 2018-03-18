@@ -12,6 +12,7 @@ exports.articles_get = (req,res)=>{
 
 // POST save article
 exports.articles_save = (req,res)=>{
+	console.log('UNIMPLEMENTED: Saving article',req.body);
 	res.json(req.body);
 }
 
