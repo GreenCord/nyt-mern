@@ -24,7 +24,10 @@ class SearchResultContainer extends Component {
     //   .catch(err => console.log(err));
     console.log('getArticles, using query',query);
     API.getArticles(query)
-    .then(res=>console.log(res))
+    .then(res=>{
+      console.log('Results:',res.data.response.docs);
+      this.setState({ results: res.data.response.docs });
+    })
     .catch(err=>console.log(err));
   };
 
