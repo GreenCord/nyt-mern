@@ -23,6 +23,9 @@ mongoose.connect(
 		useMongoClient: true
 	}
 );
+var db = mongoose.connection;
+db.on('error',console.error.bind(console, 'MongoDB connection error:'));
+
 // Send every request to the React app
 // Define any API routes before this runs
 app.get("*", function(req, res) {

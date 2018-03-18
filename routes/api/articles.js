@@ -3,17 +3,9 @@ const articlesController = require('../../controllers/articlesController');
 
 
 // GET /api/articles
-router.route('/').get(function(){
-	res.json({
-		text: 'UNIMPLEMENTED GET: /api/articles - all articles'
-	});
-})
+router.get('/',articlesController.articles_get);
 
 // POST /api/articles
-router.route('/').post(function(){
-	res.json({
-		text: 'UNIMPLEMENTED POST: /api/articles - save an article'
-	});
-})
+router.post('/',articlesController.articles_save);
 
 module.exports = router;
