@@ -10,7 +10,7 @@ router.route('/').get(function(){
 })
 
 // POST /api/articles
-router.router('/').post(function(){
+router.route('/').post(function(){
 	res.json({
 		text: 'UNIMPLEMENTED POST: /api/articles - save an article'
 	});
