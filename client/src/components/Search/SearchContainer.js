@@ -62,9 +62,10 @@ class SearchResultContainer extends Component {
     console.log('UNIMPLEMENTED: Saving article:',data);
     const dbData = {
       nyt_id: data._id,
-      headline: data.headline,
+      headline: data.headline.main,
       snippet: data.snippet,
-      web_url: data.web_url
+      web_url: data.web_url,
+      pub_date: data.pub_date
     }
     API.saveArticle(dbData)
     .then(res=>this.loadSavedArticles)

@@ -13,6 +13,15 @@ exports.articles_get = (req,res)=>{
 // POST save article
 exports.articles_save = (req,res)=>{
 	console.log('UNIMPLEMENTED: Saving article',req.body);
-	res.json(req.body);
+	article.update(
+		{ nyt_id: req.body.nyt_id },
+		req.body,
+		{ upsert: true}
+	).then(dbArticle=>{
+		console.log('Upserted dbArticle:',dbArticle);
+		res.json(req.body)
+	}
+	).catch(err=>res.json(err));
+	// res.json(req.body);
 }
 

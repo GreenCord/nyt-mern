@@ -18,10 +18,7 @@ app.use(routes);
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
-	process.env.MONGODB_URI || 'mongodb://localhose/nytmerndb',
-	{
-		useMongoClient: true
-	}
+	process.env.MONGODB_URI || 'mongodb://localhost/nytmerndb'
 );
 var db = mongoose.connection;
 db.on('error',console.error.bind(console, 'MongoDB connection error:'));
