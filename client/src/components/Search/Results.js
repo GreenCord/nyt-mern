@@ -20,7 +20,7 @@ const Results = props => (
 								  					<a className="btn btn-primary" href={result.web_url} role="button" target="_blank">Read Article</a>
 								  				</div>
 													<div className="col-xs-12 col-sm-12 col-md-6">
-								  					<a className="btn btn-success" href="" role="button">Save</a>
+								  					<a onClick={props.handleSaveArticle} className="btn btn-success" role="button">Save</a>
 								  				</div>
 								  			</div>
 								  		</div>

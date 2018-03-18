@@ -50,6 +50,11 @@ class SearchResultContainer extends Component {
     this.getArticles(query);
   };
 
+  handleSaveArticle = event => {
+    event.preventDefault();
+    console.log('UNIMPLEMENTED: Saving article...');
+  }
+
   handleClearResults = event => {
     event.preventDefault();
     this.setState({
@@ -68,7 +73,10 @@ class SearchResultContainer extends Component {
           handleInputChange={this.handleInputChange}
           handleClearResults={this.handleClearResults}
         />
-        <Results results={this.state.results} />
+        <Results 
+          results={this.state.results} 
+          handleSaveArticle={this.handleSaveArticle}
+        />
       </div>
     );
   }
