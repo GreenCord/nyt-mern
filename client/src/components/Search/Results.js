@@ -14,8 +14,17 @@ const Results = props => (
 						    {props.results.map(result => (
 							    <div className="list-group-item" key={result._id}>
 								  	<div className="row">
-								  		<div className="col-xs-12 col-sm-2 col-sm-push-10 text-right"><a className="btn btn-success" href="" role="button">Save</a></div>
-								  		<div className="col-xs-12 col-sm-10 col-sm-pull-2">
+								  		<div className="col-xs-12 col-sm-3 col-sm-push-9 text-right">
+								  			<div className="row">
+								  				<div className="col-xs-12 col-sm-12 col-md-6">
+								  					<a className="btn btn-primary" href={result.web_url} role="button" target="_blank">Read Article</a>
+								  				</div>
+													<div className="col-xs-12 col-sm-12 col-md-6">
+								  					<a className="btn btn-success" href="" role="button">Save</a>
+								  				</div>
+								  			</div>
+								  		</div>
+								  		<div className="col-xs-12 col-sm-9 col-sm-pull-3">
 								  			<h2>{result.headline.main}</h2>
 								  			<p>{result.snippet}</p>
 								  		</div>
