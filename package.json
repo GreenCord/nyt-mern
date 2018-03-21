@@ -24,6 +24,7 @@
     "express": "^4.15.4",
     "moment": "^2.21.0",
     "mongoose": "^5.0.10",
+    "react-moment": "^0.7.0",
     "react-router-dom": "^4.2.2"
   }
 }

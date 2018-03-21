@@ -28,11 +28,28 @@ export default {
 	},
 
 	saveArticle: function(data) {
-		console.log('UNIMPLEMENTED: Saving article',data);
 		return axios({
 			method: 'post',
 			url: '/api/articles',
 			data: data
-		})
+		});
+	},
+
+	deleteArticle: function(data) {
+		console.log('Deleting article',data);
+		return axios({
+			method: 'post',
+			url: '/api/articles/delete',
+			data: data
+		});
+	},
+
+	createComment: function(data,articleid) {
+		console.log('API.createComment:',data);
+		return axios({
+			method: 'post',
+			url: '/api/articles/comment/' + articleid,
+			data: data
+		});
 	}
 };

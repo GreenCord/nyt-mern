@@ -1,5 +1,6 @@
 import React from "react";
 import SaveBtn from './SaveBtn';
+import Moment from 'react-moment';
 
 const Results = props => (
   <div className="container-fluid">
@@ -27,7 +28,15 @@ const Results = props => (
 								  		</div>
 								  		<div className="col-xs-12 col-sm-9 col-sm-pull-3">
 								  			<h2>{result.headline.main}</h2>
-								  			<p>{result.snippet}</p>
+								  			<p>
+								  				<strong>
+									  				<Moment format="MM/DD/YYYY">
+				  										{result.pub_date}
+				  									</Moment>
+				  									&nbsp;&ndash;&nbsp;
+				  								</strong>
+								  				{result.snippet}
+								  			</p>
 								  		</div>
 								  	</div>
 								  </div>

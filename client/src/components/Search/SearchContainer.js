@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Search from "./Search";
 import Results from "./Results";
+import Saved from './Saved';
 import API from "../../utils/API";
 
 import './SearchContainer.css';
@@ -14,40 +15,21 @@ class SearchResultContainer extends Component {
     saved: []
   };
 
-  // When this component mounts, search the Giphy API for pictures of kittens
+  // When this component mounts, load the saved articles from the database
   componentDidMount() {
-    console.log('Results component mounted.');
     this.loadSavedArticles();
-  }
-
-  getArticles = query => {
-    // API.search(query)
-    //   .then(res => this.setState({ results: res.data.data }))
-    //   .catch(err => console.log(err));
-    console.log('getArticles, using query',query);
-    API.getArticles(query)
-    .then(res=>{
-      console.log('Results:',res.data.response.docs);
-      this.setState({ results: res.data.response.docs });
-    })
-    .catch(err=>console.log(err));
   };
 
-  loadSavedArticles = () => {
-    API.getDbArticles()
-    .then(res => console.log('Loading saved articles:',res))
-    .catch(err => console.log(err));
-  }
-
+  // Updates state of various inputs as they change
   handleInputChange = event => {
     const { name, value } = event.target;
-    console.log('InputChange Test:',name,value);
+    // console.log('InputChange Test:',name,value);
     this.setState({
       [name]: value
     });
   };
-
-  // When the form is submitted, search the Giphy API for `this.state.search`
+  
+  // When the form is submitted, prepare the query used to perform the NYT API query
   handleFormSubmit = event => {
     event.preventDefault();
     let query = {
@@ -58,8 +40,30 @@ class SearchResultContainer extends Component {
     this.getArticles(query);
   };
 
+  // Get Articles from the NYT API query
+  getArticles = query => {
+    console.log('getArticles, using query',query);
+    API.getArticles(query)
+    .then(res=>{
+      console.log('Results:',res.data.response.docs);
+      this.setState({ results: res.data.response.docs });
+    })
+    .catch(err=>console.log(err));
+  };
+
+  // Load any saved articles from the database and update the state
+  loadSavedArticles = () => {
+    API.getDbArticles()
+    .then(res => {
+      console.log('Retrieved saved articles: ', res.data);
+      this.setState({saved: res.data})
+    })
+    .catch(err => console.log(err));
+  };
+
+  // Saves a selected article to the database.
   handleSaveArticle = data => {
-    console.log('UNIMPLEMENTED: Saving article:',data);
+    console.log('Saving article:',data);
     const dbData = {
       nyt_id: data._id,
       headline: data.headline.main,
@@ -68,16 +72,37 @@ class SearchResultContainer extends Component {
       pub_date: data.pub_date
     }
     API.saveArticle(dbData)
-    .then(res=>this.loadSavedArticles)
+    .then(res=>{
+      this.loadSavedArticles();
+      // this.refs[savedpanel].scrollIntoView();
+      console.log('refs',this)
+    })
     .catch(err=>console.log(err));
-  }
+  };
 
+  // Clears the results state to empty the results panel.
   handleClearResults = event => {
     event.preventDefault();
     this.setState({
       results: []
     });
   };
+
+  handleRemoveArticle = data => {
+    console.log('Handle Remove Article: ',data);
+    API.deleteArticle(data)
+    .then(res=>this.loadSavedArticles())
+    .catch(err=>console.log(err));
+  };
+
+  handleAddComment = data => {
+    console.log('UNIMPLEMENTED: Handle add comment: ',data);
+  };
+
+  // componentDidUpdate() {
+  //   // this.scrollIntoView();
+  //   console.log('This updated:',this);
+  // };
 
   render() {
     return (
@@ -94,9 +119,16 @@ class SearchResultContainer extends Component {
           results={this.state.results} 
           handleSaveArticle={this.handleSaveArticle}
         />
+        <Saved
+          results={this.state.saved}
+          loadSavedArticles={this.loadSavedArticles}
+          handleRemoveArticle={this.handleRemoveArticle}
+          handleAddComment={this.handleAddComment}
+        />
+        
       </div>
     );
   }
-}
+};
 
 export default SearchResultContainer;
