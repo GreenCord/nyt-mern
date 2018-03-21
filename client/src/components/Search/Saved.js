@@ -72,9 +72,9 @@ class Saved extends Component {
 									  		<div>
 										  		{result.comment.map(comment => {
 										  			return (
-										  				<div className="row">
+										  				<div className="row" key={comment._id}>
 										  					<div className="col-xs-12">
-										  						<div className="well" key={comment._id}>
+										  						<div className="well">
 										  							<p>
 										  								<strong>
 										  									<Moment format="MM/DD/YYYY">
